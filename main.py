@@ -50,16 +50,19 @@ class TransactionManager:
     5. Update transaction type
     """)
     if user_input == "1":
+      transaction_id = input("Enter transaction id to be updated: ")
+      transaction = next((t for t in self.transactions if t.transaction_id == transaction_id),None)
       
       try:
         amount = int(input("Enter the new amount: "))
       except ValueError:
         print("Please enter a valid number!")
+        return
       if amount > 0:
         self.amount = amount
       else:
         print("Amount cannot be negative!")
-        print("Invalid amount!")
+  
     
   
   
