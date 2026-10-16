@@ -49,6 +49,7 @@ class TransactionManager:
     4. Update description
     5. Update transaction type
     """)
+    
     if user_input == "1":
       transaction = self.search_transaction()
       if transaction is not None:
@@ -64,6 +65,7 @@ class TransactionManager:
           print("Amount must be greater than zero!")
       else:
         print("Transaction not found!")
+        
     elif user_input == "2":
       transaction = self.search_transaction()
       if transaction is not None:
@@ -77,17 +79,42 @@ class TransactionManager:
         print("Transaction not found!")
       
     elif user_input == "3":
-      transaction = self.search_transaction().strip()
+      transaction = self.search_transaction()
       if transaction is not None:
-        date = input("Enter the date: ")
+        date = input("Enter the date: ").strip()
         if date != "":
           transaction.date = date
           print("Date updated successfully!")
-          
+        else:
+          print("Date cannot be emtpy!")
+      else:
+          print("Transaction not found!")
+        
+    elif user_input == "4":
+      transaction = self.search_transaction()
+      if transaction is not None:
+        description = input("Enter the description: ").strip()
+        if description != "":
+          transaction.description = description
+          print("Description updated!")
+        else:
+          print("Description cannot be empty!")
+      else:
+        print("Transaction not found!")
       
-  
-    
-  
+    elif user_input == "5":
+      transaction = self.search_transaction()
+      if transaction is not None:
+        transaction_type = input("Enter the Transaction type: ").strip().lower()
+        if transaction_type == "":
+            print("Transaction type cannot be empty!")
+        elif transaction_type not in ["income", "expense"]:
+            print("Invalid transaction type! Enter Income or Expense.")
+        else:
+            transaction.transaction_type = transaction_type
+            print("Transaction type updated!")
+    else:
+        print("Transaction not found!")
   
 
 
