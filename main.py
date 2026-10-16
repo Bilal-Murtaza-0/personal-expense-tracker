@@ -50,18 +50,33 @@ class TransactionManager:
     5. Update transaction type
     """)
     if user_input == "1":
-      transaction_id = input("Enter transaction id to be updated: ")
-      transaction = next((t for t in self.transactions if t.transaction_id == transaction_id),None)
-      
-      try:
-        amount = int(input("Enter the new amount: "))
-      except ValueError:
-        print("Please enter a valid number!")
-        return
-      if amount > 0:
-        self.amount = amount
+      transaction = self.search_transaction()
+      if transaction is not None:
+        try:
+          amount = int(input("Enter the new amount: "))
+        except ValueError:
+          print("Please enter a valid number!")
+          return
+        if amount > 0:
+          transaction.amount = amount
+          print("Amount updated successfully!")
+        else:
+          print("Amount must be greater than zero!")
       else:
-        print("Amount cannot be negative!")
+        print("Transaction not found!")
+    elif user_input == "2":
+      transaction = self.search_transaction()
+      if transaction is not None:
+          category = input("Enter the new category: ").strip()
+          if category != "":
+           transaction.category = category
+           print("Category updated successfully!")
+          else: 
+            print("Category cannot be empty!")
+      else:
+        print("Transaction not found!")
+        
+      
   
     
   
