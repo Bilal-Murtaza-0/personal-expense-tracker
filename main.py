@@ -40,9 +40,27 @@ class TransactionManager:
     else:
       print("Transaction not Found!")
       return None
-
-
-def update_transaction(self):
+  
+  def update_transaction(self):
+    user_input = input("""Enter your choice below: 
+    1. Update amount
+    2. Update category
+    3. Update date
+    4. Update description
+    5. Update transaction type
+    """)
+    if user_input == "1":
+      
+      try:
+        amount = int(input("Enter the new amount: "))
+      except ValueError:
+        print("Please enter a valid number!")
+      if amount > 0:
+        self.amount = amount
+      else:
+        print("Amount cannot be negative!")
+        print("Invalid amount!")
+    
   
   
 
