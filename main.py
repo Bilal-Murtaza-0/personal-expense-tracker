@@ -75,7 +75,15 @@ class TransactionManager:
             print("Category cannot be empty!")
       else:
         print("Transaction not found!")
-        
+      
+    elif user_input == "3":
+      transaction = self.search_transaction().strip()
+      if transaction is not None:
+        date = input("Enter the date: ")
+        if date != "":
+          transaction.date = date
+          print("Date updated successfully!")
+          
       
   
     
