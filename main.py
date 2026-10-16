@@ -105,17 +105,18 @@ class TransactionManager:
     elif user_input == "5":
       transaction = self.search_transaction()
       if transaction is not None:
-        transaction_type = input("Enter the Transaction type: ").strip().lower()
+          transaction_type = input("Enter the Transaction type: ").strip().lower()
         if transaction_type == "":
-            print("Transaction type cannot be empty!")
+          print("Transaction type cannot be empty!")
         elif transaction_type not in ["income", "expense"]:
-            print("Invalid transaction type! Enter Income or Expense.")
+          print("Invalid transaction type! Enter Income or Expense.")
         else:
-            transaction.transaction_type = transaction_type
-            print("Transaction type updated!")
-    else:
+          transaction.transaction_type = transaction_type
+          print("Transaction type updated!")
+      else:
         print("Transaction not found!")
-  
+    else:
+      print("Invalid choice!")
 
 
 
