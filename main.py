@@ -1,125 +1,128 @@
-class Transaction:
-  def __init__(self, transaction_id, amount, category, date, description, transaction_type):
-    self.transaction_id = transaction_id
-    self.amount = amount
-    self.category = category
-    self.date = date
-    self.description = description
-    self.transaction_type = transaction_type
 
-  def display(self):
-    print(f""" 
-    Transaction ID:{self.transaction_id},\n 
-    Amount: {self.amount},\n 
-    Category: {self.category},\n 
-    Date: {self.date},\n
-    Description: {self.description},\n
-    Transaction Type: {self.transaction_type}""")
+class Transaction:
+    def __init__(self, transaction_id, amount, category, date, description, transaction_type):
+        self.transaction_id = transaction_id
+        self.amount = amount
+        self.category = category
+        self.date = date
+        self.description = description
+        self.transaction_type = transaction_type
+
+    def display(self):
+        print(f"""
+Transaction ID: {self.transaction_id}
+Amount: {self.amount}
+Category: {self.category}
+Date: {self.date}
+Description: {self.description}
+Transaction Type: {self.transaction_type}""")
 
 
 class TransactionManager:
-  def __init__(self):
-    self.transactions = []
+    def __init__(self):
+        self.transactions = []
 
-  def add_transaction(self, transaction):
-    self.transactions.append(transaction)
-  
-  def display_all_transactions(self):
-    if len(self.transactions) >= 1:
-      for trans in self.transactions:
-        trans.display()
-    else:
-        print("No transactions found!")
-  
-  def search_transaction(self):
-    transaction_id = input("Enter Transaction ID: ")
-    
-    transaction = next((t for t in self.transactions if t.transaction_id == transaction_id),None)
-    if transaction is not None:
-      return transaction
-    else:
-      print("Transaction not Found!")
-      return None
-  
-  def update_transaction(self):
-    user_input = input("""Enter your choice below: 
-    1. Update amount
-    2. Update category
-    3. Update date
-    4. Update description
-    5. Update transaction type
-    """)
-    
-    if user_input == "1":
-      transaction = self.search_transaction()
-      if transaction is not None:
-        try:
-          amount = int(input("Enter the new amount: "))
-        except ValueError:
-          print("Please enter a valid number!")
-          return
-        if amount > 0:
-          transaction.amount = amount
-          print("Amount updated successfully!")
+    def add_transaction(self, transaction):
+        self.transactions.append(transaction)
+
+    def display_all_transactions(self):
+        if len(self.transactions) >= 1:
+            for trans in self.transactions:
+                trans.display()
         else:
-          print("Amount must be greater than zero!")
-      else:
-        print("Transaction not found!")
-        
-    elif user_input == "2":
-      transaction = self.search_transaction()
-      if transaction is not None:
-          category = input("Enter the new category: ").strip()
-          if category != "":
-           transaction.category = category
-           print("Category updated successfully!")
-          else: 
-            print("Category cannot be empty!")
-      else:
-        print("Transaction not found!")
-      
-    elif user_input == "3":
-      transaction = self.search_transaction()
-      if transaction is not None:
-        date = input("Enter the date: ").strip()
-        if date != "":
-          transaction.date = date
-          print("Date updated successfully!")
+            print("No transactions found!")
+
+    def search_transaction(self):
+        transaction_id = input("Enter Transaction ID: ")
+
+        transaction = next(
+            (t for t in self.transactions
+             if t.transaction_id == transaction_id),
+            None
+        )
+
+        if transaction is not None:
+            return transaction
         else:
-          print("Date cannot be emtpy!")
-      else:
-          print("Transaction not found!")
-        
-    elif user_input == "4":
-      transaction = self.search_transaction()
-      if transaction is not None:
-        description = input("Enter the description: ").strip()
-        if description != "":
-          transaction.description = description
-          print("Description updated!")
+            print("Transaction not found!")
+            return None
+
+    def update_transaction(self):
+        user_input = input("""Enter your choice below:
+1. Update amount
+2. Update category
+3. Update date
+4. Update description
+5. Update transaction type
+""")
+
+        if user_input == "1":
+            transaction = self.search_transaction()
+
+            if transaction is not None:
+                try:
+                    amount = int(input("Enter the new amount: "))
+                except ValueError:
+                    print("Please enter a valid number!")
+                    return
+
+                if amount > 0:
+                    transaction.amount = amount
+                    print("Amount updated successfully!")
+                else:
+                    print("Amount must be greater than zero!")
+
+        elif user_input == "2":
+            transaction = self.search_transaction()
+
+            if transaction is not None:
+                category = input("Enter the new category: ").strip()
+
+                if category != "":
+                    transaction.category = category
+                    print("Category updated successfully!")
+                else:
+                    print("Category cannot be empty!")
+
+        elif user_input == "3":
+            transaction = self.search_transaction()
+
+            if transaction is not None:
+                date = input("Enter the new date: ").strip()
+
+                if date != "":
+                    transaction.date = date
+                    print("Date updated successfully!")
+                else:
+                    print("Date cannot be empty!")
+
+        elif user_input == "4":
+            transaction = self.search_transaction()
+
+            if transaction is not None:
+                description = input("Enter the new description: ").strip()
+
+                if description != "":
+                    transaction.description = description
+                    print("Description updated successfully!")
+                else:
+                    print("Description cannot be empty!")
+
+        elif user_input == "5":
+            transaction = self.search_transaction()
+
+            if transaction is not None:
+                transaction_type = input(
+                    "Enter the transaction type (income/expense): "
+                ).strip().lower()
+
+                if transaction_type == "":
+                    print("Transaction type cannot be empty!")
+                elif transaction_type not in ["income", "expense"]:
+                    print("Invalid transaction type! Enter income or expense.")
+                else:
+                    transaction.transaction_type = transaction_type
+                    print("Transaction type updated successfully!")
+
         else:
-          print("Description cannot be empty!")
-      else:
-        print("Transaction not found!")
-      
-    elif user_input == "5":
-      transaction = self.search_transaction()
-      if transaction is not None:
-          transaction_type = input("Enter the Transaction type: ").strip().lower()
-        if transaction_type == "":
-          print("Transaction type cannot be empty!")
-        elif transaction_type not in ["income", "expense"]:
-          print("Invalid transaction type! Enter Income or Expense.")
-        else:
-          transaction.transaction_type = transaction_type
-          print("Transaction type updated!")
-      else:
-        print("Transaction not found!")
-    else:
-      print("Invalid choice!")
-
-
-
-
-
-
+            print("Invalid choice!")
