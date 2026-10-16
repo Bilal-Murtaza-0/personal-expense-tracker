@@ -20,3 +20,34 @@ class Transaction:
 class TransactionManager:
   def __init__(self):
     self.transactions = []
+
+  def add_transaction(self, transaction):
+    self.transactions.append(transaction)
+  
+  def display_all_transactions(self):
+    if len(self.transactions) >= 1:
+      for trans in self.transactions:
+        trans.display()
+    else:
+        print("No transactions found!")
+  
+  def search_transaction(self):
+    transaction_id = input("Enter Transaction ID: ")
+    
+    transaction = next((t for t in self.transactions if t.transaction_id == transaction_id),None)
+    if transaction is not None:
+      return transaction
+    else:
+      print("Transaction not Found!")
+      return None
+
+
+def update_transaction(self):
+  
+  
+
+
+
+
+
+
