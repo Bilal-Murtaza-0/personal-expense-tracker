@@ -69,7 +69,7 @@ class TransactionManager:
             
             print(self.total_income)
             print(self.total_expense)
-            print(self.net_balance)
+            print(net_balance)
             
         else:
             print("No transactions found!")
