@@ -46,7 +46,38 @@ class TransactionManager:
         else:
             print("Transaction not found!")
             return None
+            
+    def delete_transaction(self):
+        transaction = self.search_transaction()
 
+        if transaction is not None:
+            self.transactions.remove(transaction)
+            print("Transaction removed successfully!")
+            
+    def calculate_totals(self):
+        self.total_income = 0
+        self.total_expense = 0
+
+        if len(self.transactions) >= 1:
+            for trans in self.transactions:
+                if trans.transaction_type == "income":
+                   self.total_income += trans.amount  
+                elif trans.transaction_type == "expense":
+                    self.total_expense += trans.amount
+                    
+            net_balance = self.total_income - self.total_expense
+            
+            print(self.total_income)
+            print(self.total_expense)
+            print(self.net_balance)
+            
+        else:
+            print("No transactions found!")
+        
+    
+        
+
+    
     def update_transaction(self):
         user_input = input("""Enter your choice below:
 1. Update amount
@@ -54,6 +85,7 @@ class TransactionManager:
 3. Update date
 4. Update description
 5. Update transaction type
+6. Delete the transaction
 """)
 
         if user_input == "1":
@@ -124,5 +156,27 @@ class TransactionManager:
                     transaction.transaction_type = transaction_type
                     print("Transaction type updated successfully!")
 
+        elif user_input == "6":
+            self.delete_transaction()
+            
         else:
             print("Invalid choice!")
+
+manager = TransactionManager()
+
+t1 = Transaction("T101", 5000, "Salary", "2026-10-01", "Monthly salary", "income")
+t2 = Transaction("T102", 1200, "Food", "2026-10-02", "Grocery shopping", "expense")
+t3 = Transaction("T103", 800, "Transport", "2026-10-03", "Bus fare", "expense")
+
+manager.add_transaction(t1)
+manager.add_transaction(t2)
+manager.add_transaction(t3)
+
+print("All transactions before deletion:")
+manager.display_all_transactions()
+
+print("\nDelete an existing transaction:")
+manager.delete_transaction()
+
+print("\nTransactions after deletion:")
+manager.display_all_transactions()
