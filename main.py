@@ -67,15 +67,23 @@ class TransactionManager:
                     
             net_balance = self.total_income - self.total_expense
             
-            print(f"Total Balance: {self.total_income}")
+            print(f"Total Income: {self.total_income}")
             print(f"Total Expense: {self.total_expense}")
             print(f"Net Balance: {net_balance}")
             
         else:
             print("No transactions found!")
         
-    
-        
+    def filter_by_type(self):
+        transaction_type = input("Enter the transaction type: ").strip().lower()
+
+        for trans in self.transactions: 
+            if transaction_type == trans.type:
+                trans.display()
+            else:
+                print("No matching transactions were foun!")
+            
+                
 
     
     def update_transaction(self):
