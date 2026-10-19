@@ -58,7 +58,7 @@ class TransactionManager:
         self.total_income = 0
         self.total_expense = 0
 
-        if len(self.transactions) >= 1:
+        if self.transactions:
             for trans in self.transactions:
                 if trans.transaction_type == "income":
                    self.total_income += trans.amount  
@@ -67,9 +67,9 @@ class TransactionManager:
                     
             net_balance = self.total_income - self.total_expense
             
-            print(self.total_income)
-            print(self.total_expense)
-            print(net_balance)
+            print(f"Total Balance: {self.total_income}")
+            print(f"Total Expense: {self.total_expense}")
+            print(f"Net Balance: {net_balance}")
             
         else:
             print("No transactions found!")
