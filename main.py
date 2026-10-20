@@ -75,13 +75,19 @@ class TransactionManager:
             print("No transactions found!")
         
     def filter_by_type(self):
-        transaction_type = input("Enter the transaction type: ").strip().lower()
-
-        for trans in self.transactions: 
-            if transaction_type == trans.type:
+        transaction_type = input(
+            "Enter transaction type (income/expense): "
+        ).strip().lower()
+    
+        found = False
+    
+        for trans in self.transactions:
+            if transaction_type == trans.transaction_type:
                 trans.display()
-            else:
-                print("No matching transactions were foun!")
+                found = True
+    
+        if not found:
+            print("No matching transactions were found!")
             
                 
 
